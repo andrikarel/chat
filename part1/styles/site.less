@@ -26,19 +26,20 @@ body {
     font-weight: bold;
 }
 
-.container{
+.container-centered{
     width: 50%;
     height: 50%;
     margin: auto;
     padding: 15px;
 }
 
-.container .login, .login p{
+.container-centered > div {
     margin: auto;
     width: 50%;
 }
-.login .input, .login button{
-    display: block;
+
+.container-centered input, .container-centered button, .container-centered p {
     margin: auto;
-    margin-top: 15px;
+    display: block;
+    text-align: center;
 }

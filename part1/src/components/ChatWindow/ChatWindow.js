@@ -14,7 +14,8 @@ class ChatWindow extends React.Component {
         super(props);
         this.state={
             msg: '',
-            messages: []
+            messages: [],
+            rooms: []
         }
     }
     sendMessage() {
@@ -24,8 +25,10 @@ class ChatWindow extends React.Component {
     }
     render() {
         const {messages,msg } = this.state;
+        console.log(this.props.currentUser);
         return(
             <div className="chat-window">
+                <p>Hello {this.props.currentUser}!</p>
                 {messages.map(m=>(<div key={m}>{m}</div>))}
                 <div className="input-box">
                     <input type="text"

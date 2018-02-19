@@ -34,7 +34,7 @@ class App extends React.Component {
         }
         else {
             return (
-                <ChatWindow/>
+                <ChatWindow currentUser={this.state.currentUser}/>
             );
         }
     }
@@ -42,7 +42,7 @@ class App extends React.Component {
         return (
             <div className="hobo">
                 <Banner />
-                <div className="container">
+                <div className="container-centered">
                     {this.getMainBody()}
                 </div>
             </div>
