@@ -13,7 +13,7 @@ class LoginPage extends React.Component {
         socket.emit('adduser',this.state.input,(nickAvailable) => {
             if(nickAvailable && currentUser !== '') {
                 console.log('ITS AVAIALABLE');
-                
+                this.props.updateUser(this.state.input);
             }
             else {
                 console.log('SORRY NOT AVAILABLE');

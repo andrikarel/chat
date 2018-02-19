@@ -1,5 +1,44 @@
-// Insert your styles here, using LESS
-
+//CSS reset because of stupid whitespace
+body, div span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, caption {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
 body {
+}
 
+.banner {
+    height: 100px;
+    line-height: 100px;
+    color: white;
+    background-color: blueviolet;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.banner p{
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.container{
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    padding: 15px;
+}
+
+.container .login, .login p{
+    margin: auto;
+    width: 50%;
+}
+.login .input, .login button{
+    display: block;
+    margin: auto;
+    margin-top: 15px;
 }

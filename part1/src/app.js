@@ -5,7 +5,7 @@ import '../styles/site';
 import socketClient from 'socket.io-client';
 //import { prototype } from '../../../../../../.cache/typescript/2.6/node_modules/@types/tapable';
 import LoginPage from './components/LoginPage/LoginPage';
-//import Banner from './components/Banner/Banner';
+import Banner from './components/Banner/Banner';
 import ChatWindow from './components/ChatWindow/ChatWindow';
 
 
@@ -14,18 +14,22 @@ class App extends React.Component {
 
     constructor(props,ctx) {
         super(props,ctx);
+        this.state = {
+            currentUser: ''
+        }
     }
     getChildContext() {
         return{
             socket: socketClient('http://localhost:8080'),
-            currentUser: ''
         };
     }
+    updateUser(user) {
+        this.setState({currentUser: user})
+    }
     getMainBody() {
-        console.log(this.context);
-        if(this.currentUser === '') {
+        if(this.state.currentUser === '') {
             return (
-                <LoginPage/>
+                <LoginPage updateUser={(x) => this.updateUser(x)}/>
             );
         }
         else {
@@ -37,15 +41,16 @@ class App extends React.Component {
     render() {
         return (
             <div className="hobo">
-                
-                {this.getMainBody()}
+                <Banner />
+                <div className="container">
+                    {this.getMainBody()}
+                </div>
             </div>
         );
     }
 };
 App.childContextTypes = {
     socket: PropTypes.object.isRequired,
-    currentUser : PropTypes.string
 };
 
 
