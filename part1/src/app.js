@@ -38,7 +38,7 @@ class App extends React.Component {
                 <LoginPage updateUser={(x) => this.updateUser(x)}/>
             );
         }
-        else {
+        else if(this.state.currentRoom !== '') {
             return (
                 <div className='row'>
                     <div className='col-md-3'>
@@ -56,12 +56,24 @@ class App extends React.Component {
                 </div>
             );
         }
+        else {
+            return (
+                <div className='row'>
+                    <div className='col-md-3'>
+                        <RoomList 
+                            currentUser={this.state.currentUser}
+                            updateCurrentRoom={(x) => this.updateCurrentRoom(x)}
+                            currentRoom = {this.state.currentRoom}/>
+                    </div>
+                </div>
+            );
+        }
     }
     render() {
         return (
             <div>
-                <Banner />
-                <div>
+                <Banner/>
+                <div className="col-md-12">
                     {this.getMainBody()}
                 </div>
             </div>

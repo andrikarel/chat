@@ -49,7 +49,6 @@ class RoomList extends React.Component {
         };
         socket.emit('joinroom',joinObj,(accepted) => {
             if(accepted) {
-                console.log('i have the grog');
                 this.props.updateCurrentRoom(key);
                 socket.emit('rooms');
             }
@@ -62,14 +61,18 @@ class RoomList extends React.Component {
 
         return(
             <div className="RoomContainer">
-                {roomKeys.map(m=>(<div className="RoomItem" key={m}>{m}
-                    <button type="button" 
-                    className ="btn pull-right" onClick={() => this.joinRoom(m)}>JoinRoom</button></div>))}
+                {roomKeys.map(m=>(<div className="RoomItem" key={m}>
+                    <p className="RoomItemName">{m}</p>
+                    <button 
+                        className="RoomItemButton btn pull-right"
+                        type="button" 
+                        onClick={() => this.joinRoom(m)}>JoinRoom</button></div>))
+                }
                 <input 
-                type="text" 
-                className="roomName"
-                value={roomName}
-                onInput={(e) => this.setState({ roomName:e.target.value})}/>
+                    type="text" 
+                    className="roomName"
+                    value={roomName}
+                    onInput={(e) => this.setState({ roomName:e.target.value})}/>
                 <button type="button" onClick={() => this.createRoom(roomName)}>CreateRoom</button>
             </div>
         );
