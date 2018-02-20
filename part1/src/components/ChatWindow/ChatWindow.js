@@ -26,24 +26,27 @@ class ChatWindow extends React.Component {
         this.setState({ msg: ''});
     }
     leaveRoom() {
-        /*socket.emit('partroom', () => {
+        const {socket} = this.context;
+        socket.emit('partroom', this.props.currentRoom, () => {
             console.log('user left room');
-        });*/
+        });
         this.props.updateCurrentRoom('');
     }
     render() {
         const {messages,msg } = this.state;
         return(
             <div className="chat-window">
-                <h1>You are in: {this.props.currentRoom}</h1>
-                <button type="button" className="btn pull-right" onClick={() => this.leaveRoom()}>Leave</button>
-                <p>Hello {this.props.currentUser}!</p>
+                <div className="messageBoxBanner">
+                    <h1>{this.props.currentRoom}</h1>
+                    <button type="button" className="btn pull-right" onClick={() => this.leaveRoom()}>Leave Room</button>
+                </div>
                 <div className='messageBox'>
                     {messages.map(m=>(<div key={m.nick + m.timestamp}>{m.timestamp + ': ' + m.message}</div>))}
                 </div>
-                <div className="input-box">
+                <div className="messageBoxInput">
                     <input type="text"
                     value={msg}
+                    placeholder="Enter message..."
                     className="input input-big" 
                     onInput={(e) => this.setState({ msg:e.target.value})}/>
                     <button type="button" 

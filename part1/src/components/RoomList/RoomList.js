@@ -4,6 +4,7 @@ import {PropTypes} from 'prop-types';
 class RoomList extends React.Component {
     componentDidMount() {
         const { socket } = this.context;
+        this.joinRoom('lobby'); 
         socket.emit('rooms');
         socket.on('roomlist',rooms => {
             this.setState({rooms:rooms});
@@ -13,10 +14,8 @@ class RoomList extends React.Component {
             }
             this.setState({roomKeys:roomList});
         });
-        this.joinRoom('lobby');
-        
+        $('#lobby').addClass('selected');        
     }
-
     constructor(props,ctx) {
         super(props,ctx);
         this.state={
@@ -24,28 +23,25 @@ class RoomList extends React.Component {
             roomName: '',
             roomKeys:[]
         }
-        
     }
     joinRoom(key) {
         const {socket} = this.context;
         var joinObj={
             room: key,
-            pass: '' 
+            pass: ''
         };
         socket.emit('joinroom',joinObj,(accepted) => {
             if(accepted) {
                 this.props.updateCurrentRoom(key);
                 socket.emit('rooms');
             }
-
         })
-
     }
     createRoom(key) {
         const {socket} = this.context;
         var joinObj={
             room: key,
-            pass: '' 
+            pass: ''
         };
         socket.emit('joinroom',joinObj,(accepted) => {
             if(accepted) {
@@ -53,27 +49,25 @@ class RoomList extends React.Component {
                 socket.emit('rooms');
             }
         })
-
     }
     render() {
         const {roomKeys, roomName} = this.state;
-
-
         return(
             <div className="RoomContainer">
-                {roomKeys.map(m=>(<div className="RoomItem" key={m}>
+                {roomKeys.map(m=>(<div id={m} className="RoomItem" key={m}>
                     <p className="RoomItemName">{m}</p>
                     <button 
-                        className="RoomItemButton btn pull-right"
+                        className="RoomItemButton btn"
                         type="button" 
-                        onClick={() => this.joinRoom(m)}>JoinRoom</button></div>))
+                        onClick={() => this.joinRoom(m)}>Join Room</button></div>))
                 }
                 <input 
                     type="text" 
                     className="roomName"
+                    placeholder="Enter room name..."
                     value={roomName}
                     onInput={(e) => this.setState({ roomName:e.target.value})}/>
-                <button type="button" onClick={() => this.createRoom(roomName)}>CreateRoom</button>
+                <button type="button" className="CreateRoomButton btn" onClick={() => this.createRoom(roomName)}>Create Room</button>
             </div>
         );
     }
