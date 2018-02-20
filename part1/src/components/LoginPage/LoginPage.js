@@ -24,17 +24,20 @@ class LoginPage extends React.Component {
         const {input} = this.state;
         return(
             <div className="login">
-                <p>{input}</p>
+                <p className="nickInput">{input}</p>
                 <div className="input-box">
                     <input type="text"
-                    value={input}
-                    className="input input-big" 
-                    onInput={(e) => this.setState({ input:e.target.value})}/>
-                    <button type="button" 
-                    className ="btn pull-right"
-                    onClick={() => this.addUser()}>Choose Nickname</button>
+                        value={input}
+                        className="input input-big" 
+                        onInput={(e) => this.setState({ input:e.target.value})}/>
+                    <div className="loginButton">
+                        <button type="button" 
+                            className ="btn pull-right"
+                            onClick={() => this.addUser()}>Choose Nickname</button>
+                    </div>
                 </div>
             </div>
+            
         );
     }
 };
